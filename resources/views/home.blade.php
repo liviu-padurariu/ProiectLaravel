@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+                    <div> <a href="{{URL::to('articles')}}">Afisare toate sarcinile</a> </div>
                     {{ __('You are logged in!') }}
                 </div>
             </div>
