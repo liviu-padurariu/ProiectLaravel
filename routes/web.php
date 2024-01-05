@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -21,4 +22,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/', [ArticleController::class, 'index']);
     Route::resource('articles', ArticleController::class); // Ruta de resurse va genera CRUD URI
+    Route::resource('roles', RoleController::class); // Ruta de resurse va genera CRUD URI
 });
