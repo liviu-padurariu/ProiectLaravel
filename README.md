@@ -30,3 +30,7 @@ php artisan make:seeder <NameSeeder> e.g: DatabaseSeeder, ProductSeeder
 How to run seeder:
 
 php artisan db:seed --class=<NameSeeder> e.g: DatabaseSeeder, ProductSeeder
+
+How to make controller:
+
+php artisan make:controller <ControllerName> --resource
