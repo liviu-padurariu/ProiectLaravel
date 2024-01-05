@@ -1,3 +1,10 @@
+# BEFORE RUN CREATE .env FILE #
+
+
+# PASTE THE CONTENT FROM THE .env.example FILE #
+
+
+
 Run migration after you create the database with code name Dilema.
 
 ```sh
