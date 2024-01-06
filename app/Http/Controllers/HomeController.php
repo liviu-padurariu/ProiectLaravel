@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -26,6 +28,14 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+
+        if ($user->isAdmin()) {
+            // Redirect to the admin dashboard
+            return redirect()->route('admin.index');
+        }
+
+        // For regular users, display the regular home view
         return view('home');
     }
 
