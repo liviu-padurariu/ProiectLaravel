@@ -12,7 +12,7 @@
   <div class="panel-body">
     <div class="form-group">
       <div class="pull-right">
-        <a href="/articles/create" style="margin: 10px" class="btn btn-info">Adaugare Article Noua</a>
+        <a href="/articles/create" style="margin: 10px" class="btn btn-info">Adaugare Articol Nou</a>
       </div>
     </div>
     <table class="table table-bordered table-stripped">
