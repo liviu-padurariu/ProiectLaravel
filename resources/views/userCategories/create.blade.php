@@ -36,7 +36,7 @@
     </div>
     <div class="form-group">
       <input type="submit" value="Adauga" class="btn btn-info">
-      <a href="{{ route('articles.index') }}" class="btn btndefault">Cancel</a>
+      <a href="{{ route('articles.index') }}" class="btn btn-default">Cancel</a>
     </div>
     {{ Form::close() }}
   </div>
