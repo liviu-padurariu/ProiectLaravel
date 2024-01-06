@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserCategoryController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ArticleController;
@@ -25,4 +26,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('articles', ArticleController::class); // Ruta de resurse va genera CRUD URI
     Route::resource('roles', RoleController::class); // Ruta de resurse va genera CRUD URI
     Route::resource('categories', CategoryController::class); // Ruta de resurse va genera CRUD URI
+    Route::resource('userCategories', UserCategoryController::class); // Ruta de resurse va genera CRUD URI
 });
