@@ -7,6 +7,7 @@ use App\Models\Categories;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ArticleController extends Controller
 {
@@ -25,11 +26,21 @@ class ArticleController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($userId = null)
     {
+        $id = Session::get('user_id');
+        $role = Session::get('user_role');
+
+        if (!$id) {
+            return redirect()->route('articles.index')->with('error', 'No user Id found');
+        }
+
         $categories = Categories::all();
-        $users = User::all();
-        return view('articles.create', compact('categories', 'users'));
+        $user = User::find($id);
+
+        $categories = $user->categories;
+
+        return view('articles.create', compact('categories'));
     }
 
     /**
@@ -37,18 +48,27 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'title' => 'required',
-            'content' => 'required'
+        // Validate the request
+        $request->validate([
+            'title' => 'required|max:255',
+            'content' => 'required',
+            'category_id' => 'required|exists:categories,id',
         ]);
-        // Set 'submission_date' to the current date and time
-        $request->merge(['submission_date' => Carbon::now()]);
-        $request->merge(['is_approved' => false]);
 
-        // create new article
-        // create new article
-        Article::create($request->all());
-        return redirect()->route('articles.index')->with('success', 'Your article added successfully!');
+        // Create the article
+        $article = new Article([
+            'id' => $request->id,
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+            'user_id' => auth()->id(),
+            'submission_date' => now(),
+            'is_approved' => false,
+            'category_id' => $request->input('category_id'),
+        ]);
+
+        $article->save();
+
+        return redirect()->route('articles.index')->with('success', 'Article created successfully');
     }
 
     /**
@@ -67,8 +87,10 @@ class ArticleController extends Controller
     {
         $article = Article::find($id);
         $categories = Categories::all();
-        $users = User::all();
-        return view('articles.edit', compact('article', 'categories', 'users'));
+        $user = User::find(auth()->id());
+
+        $categories = $user->categories;
+        return view('articles.edit', compact('article', 'categories', 'user'));
     }
 
     /**
@@ -79,7 +101,6 @@ class ArticleController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'content' => 'required',
-            'user_id' => 'required',
             'category_id' => 'required',
             'is_approved' => 'required'
         ]);

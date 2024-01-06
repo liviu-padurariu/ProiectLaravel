@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+
 
 class LoginController extends Controller
 {
@@ -36,5 +39,16 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        // Save user_id in the session
+        Session::put('user_id', $user->id);
+        Session::put('user_role', $user->role);
+
+        // You can perform additional actions if needed
+
+        return redirect()->intended($this->redirectPath());
     }
 }
