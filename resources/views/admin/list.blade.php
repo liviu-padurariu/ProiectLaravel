@@ -22,7 +22,7 @@
                         <td>
                             {{ $user->role->name ?? 'N/A' }}
                             @if ($user->isAdmin())
-                                <span class="badge badge-primary">Admin</span>
+                                <span class="badge text-bg-danger">Admin</span>
                             @endif
                         </td>
                         <td>

@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.app')
 @section('content')
 @if ($message = Session::get('success'))
 <div class="alert alert-success">
@@ -12,7 +12,7 @@
   <div class="panel-body">
     <div class="form-group">
       <div class="pull-right">
-        <a href="/articles/create" style="margin: 10px" class="btn btn-info">Adaugare Articol Nou</a>
+        <a href="{{ route('articles.create') }}" style="margin: 10px" class="btn btn-info">Adaugare Articol Nou</a>
       </div>
     </div>
     <table class="table table-bordered table-stripped">
