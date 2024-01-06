@@ -15,7 +15,7 @@ class RolesSeeder extends Seeder
     {
         $roles = [
             [
-                'name' => 'READER',
+                'name' => 'ADMIN',
             ],
             [
                 'name' => 'EDITOR',
@@ -24,8 +24,8 @@ class RolesSeeder extends Seeder
                 'name' => 'JOURNALIST',
             ],
             [
-                'name' => 'ADMIN',
-            ]
+                'name' => 'READER',
+            ],
         ];
 
 
