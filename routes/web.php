@@ -19,10 +19,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-
+Route::get('/', [HomeController::class, 'publicPage'])->name('welcome');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::get('/', [ArticleController::class, 'index']);
+    // Route::get('/', [ArticleController::class, 'index']);
     Route::resource('articles', ArticleController::class); // Ruta de resurse va genera CRUD URI
     Route::resource('roles', RoleController::class); // Ruta de resurse va genera CRUD URI
     Route::resource('categories', CategoryController::class); // Ruta de resurse va genera CRUD URI
