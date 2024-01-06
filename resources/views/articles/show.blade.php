@@ -6,7 +6,7 @@
   </div>
   <div class="panel-body">
     <div class="pull-right">
-      <a class="btn btn-default" href="{{ route('articles.index') }}">Inapoi</a>
+      <a class="btn btn-default" href="{{ route('welcome') }}">Inapoi</a>
     </div>
     <div class="form-group">
       <strong>Titlu: </strong> {{ $article->title }}
