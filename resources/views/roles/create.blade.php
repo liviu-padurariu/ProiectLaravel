@@ -20,7 +20,7 @@
     </div>
     <div class="form-group">
       <input type="submit" value="Adauga Rol Nou" class="btn btn-info">
-      <a href="{{ route('roles.index') }}" class="btn btndefault">Cancel</a>
+      <a href="{{ route('roles.index') }}" class="btn btn-default">Cancel</a>
     </div>
     {{ Form::close() }}
   </div>

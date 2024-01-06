@@ -15,7 +15,9 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
-        $articles = Article::orderBy('submission_date', 'ASC')->paginate(5);
+        $articles = Article::orderBy('submission_date', 'ASC')
+            ->with(['user', 'category'])
+            ->paginate(5);
         $value = ($request->input('page', 1) - 1) * 5;
         return view('articles.list', compact('articles'))->with('i', $value);
     }

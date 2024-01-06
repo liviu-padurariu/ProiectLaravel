@@ -2,11 +2,11 @@
 @section('content')
 <div class="panel panel-default">
   <div class="panel-heading">
-    View Task
+    Vizualizare Articol
   </div>
   <div class="panel-body">
     <div class="pull-right">
-      <a class="btn btn-default" href="{{ route('articles.index') }}">Inapoi</a>
+      <a class="btn btn-default" href="{{ route('welcome') }}">Inapoi</a>
     </div>
     <div class="form-group">
       <strong>Titlu: </strong> {{ $article->title }}
@@ -15,16 +15,16 @@
       <strong>Descriere: </strong> {{ $article->content }}
     </div>
     <div class="form-group">
-      <strong>User ID: </strong> {{ $article->user_id }}
+      <strong>Nume Autor: </strong> {{ $article->user->name }}
     </div>
     <div class="form-group">
-      <strong>Category ID: </strong> {{ $article->category_id }}
+      <strong>Nume Categorie: </strong> {{ $article->category->name }}
     </div>
     <div class="form-group">
-      <strong>Submission Date: </strong> {{ $article->submission_date }}
+      <strong>Data Trimiterii: </strong> {{ $article->submission_date }}
     </div>
     <div class="form-group">
-      <strong>Approved: </strong> {{ $article->is_approved }}
+      <strong>Status: </strong> {{ $article->is_approved ? 'Publicat' : 'Inca nu este publicat' }}
     </div>
   </div>
 </div>

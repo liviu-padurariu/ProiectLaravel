@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +16,9 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // The 'auth' middleware is applied by default to all methods.
+        // If you want to exclude a method from the middleware, you can use the 'except' method.
+        $this->middleware('auth')->except('publicPage');
     }
 
     /**
@@ -34,5 +37,14 @@ class HomeController extends Controller
 
         // For regular users, display the regular home view
         return view('home');
+    }
+
+    public function publicPage(Request $request)
+    {
+        $articles = Article::orderBy('submission_date', 'ASC')
+            ->with(['user', 'category'])
+            ->paginate(5);
+        $value = ($request->input('page', 1) - 1) * 5;
+        return view('welcome', compact('articles'))->with('i', $value);
     }
 }

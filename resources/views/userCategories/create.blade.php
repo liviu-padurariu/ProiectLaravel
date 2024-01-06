@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
 <div class="panel panel-default">
-  <div class="panel-heading">Adaugă Sarcina noua</div>
+  <div class="panel-heading">Adauga o categorie noua unui Jurnalist!</div>
   <div class="panel-body">
     @if (count($errors) > 0)
     <div class="alert alert-danger">
@@ -13,18 +13,30 @@
       </ul>
     </div>
     @endif
-    {{ Form::open(array('route' => 'articles.store','method'=>'POST')) }}
+    {{ Form::open(array('route' => 'userCategories.store','method'=>'POST')) }}
     <div class="form-group">
-      <label for="name">Nume</label>
-      <input type="text" name="name" class="form-control" value="{{old('name') }}">
+      <label for="user">Nume Autor</label>
+      <select name="user_id" class="form-control">
+        @foreach ($users as $user)
+        <option value="{{ $user['id'] }}" {{ old('user_id') == $user['id'] ? 'selected' : '' }}>
+          {{ $user['name'] }}
+        </option>
+        @endforeach
+      </select>
     </div>
     <div class="form-group">
-      <label for="description">Descriere</label>
-      <textarea name="description" class="form-control" rows="3">{{old('description') }}</textarea>
+      <label for="category">Nume Categorie</label>
+      <select name="category_id" class="form-control">
+        @foreach ($categories as $category)
+        <option value="{{ $category['id'] }}" {{ old('category_id') == $category['id'] ? 'selected' : '' }}>
+          {{ $category['name'] }}
+        </option>
+        @endforeach
+      </select>
     </div>
     <div class="form-group">
-      <input type="submit" value="Adauga Sarcina" class="btn btn-info">
-      <a href="{{ route('articles.index') }}" class="btn btndefault">Cancel</a>
+      <input type="submit" value="Adauga" class="btn btn-info">
+      <a href="{{ route('articles.index') }}" class="btn btn-default">Cancel</a>
     </div>
     {{ Form::close() }}
   </div>

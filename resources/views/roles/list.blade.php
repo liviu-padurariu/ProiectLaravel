@@ -30,7 +30,7 @@
           <a class="btn btn-success" href="{{route('roles.show',$role->id) }}">Vizualizare</a>
           <a class="btn btn-primary" href="{{route('roles.edit',$role->id) }}">Modificare</a>
           {{ Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) }}
-          {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
+          {{ Form::submit('Stergere', ['class' => 'btn btn-danger']) }}
           {{ Form::close() }}
         </td>
       </tr>
