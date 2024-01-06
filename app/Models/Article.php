@@ -19,4 +19,14 @@ class Article extends Model
     protected $fillable = [
         'user_id', 'title', 'content', 'category_id', 'submission_date', 'is_approved'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Categories::class, 'category_id');
+    }
 }
