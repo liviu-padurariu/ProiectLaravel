@@ -20,8 +20,8 @@
         <th width="20">No</th>
         <th>Titlu</th>
         <th>Content</th>
-        <th>User ID</th>
-        <th>Category ID</th>
+        <th>Nume Autor</th>
+        <th>Nume Categorie</th>
         <th>Submission Date</th>
         <th>Approved</th>
         <th width="300">Actiune</th>
@@ -32,8 +32,8 @@
         <td>{{ ++$i }}</td>
         <td>{{ $article->title }}</td>
         <td>{{ $article->content }}</td>
-        <td>{{ $article->user_id }}</td>
-        <td>{{ $article->category_id }}</td>
+        <td>{{ $article->user->name  }}</td>
+        <td>{{ $article->category->name }}</td>
         <td>{{ $article->submission_date }}</td>
         <td>{{ $article->is_approved }}</td>
         <td>
