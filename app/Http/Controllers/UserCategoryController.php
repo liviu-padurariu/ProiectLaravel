@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categories;
+use App\Models\User;
 use App\Models\UserCategories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -13,7 +15,9 @@ class UserCategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $userCategories = UserCategories::orderBy('user_id', 'ASC')->paginate(5);
+        $userCategories = UserCategories::orderBy('id', 'ASC')
+            ->with(['user', 'category'])
+            ->paginate(5);
         $value = ($request->input('page', 1) - 1) * 5;
         return view('userCategories.list', compact('userCategories'))->with('i', $value);
     }
@@ -23,7 +27,9 @@ class UserCategoryController extends Controller
      */
     public function create()
     {
-        return view('userCategories.create');
+        $categories = Categories::all();
+        $users = User::all();
+        return view('userCategories.create', compact('categories', 'users'));
     }
 
     /**
@@ -31,7 +37,10 @@ class UserCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, ['user_id' => 'required', 'category_id' => 'required']);
+        $this->validate($request, [
+            'user_id' => 'required',
+            'category_id' => 'required'
+        ]);
         // create new userCategory
         UserCategories::create($request->all());
         return redirect()->route('userCategories.index')->with('success', 'A new userCategories has been created successfully!');
@@ -52,7 +61,9 @@ class UserCategoryController extends Controller
     public function edit(string $id)
     {
         $userCategory = UserCategories::find($id);
-        return view('userCategories.edit', compact('userCategory'));
+        $categories = Categories::all(); // Returns all the categories from the categories table
+        $users = User::all(); // Returns all user from the users table
+        return view('userCategories.edit', compact('userCategory', 'categories', 'users'));
     }
 
     /**
