@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
 <div class="panel panel-default">
-  <div class="panel-heading"> Modificare informatii Sarcina</div>
+  <div class="panel-heading">Modificare Informatii Articol</div>
   <div class="panel-body">
     <!-- exista inregistrari in tabelul task -->
     @if (count($errors)> 0)
@@ -25,7 +25,7 @@
       <textarea name="content" class="form-control" rows="3">{{ $article->content }}</textarea>
     </div>
     <div class="form-group">
-      <label for="user">User</label>
+      <label for="user">Nume Autor</label>
       <select name="user_id" class="form-control">
         @foreach ($users as $user)
         <option value="{{ $user['id'] }}" {{ $article->user_id == $user['id'] ? 'selected' : '' }}>
@@ -35,7 +35,7 @@
       </select>
     </div>
     <div class="form-group">
-      <label for="category">Categorie</label>
+      <label for="category">Nume Categorie</label>
       <select name="category_id" class="form-control">
         @foreach ($categories as $category)
         <option value="{{ $category['id'] }}" {{ $article->category_id == $category['id'] ? 'selected' : '' }}>
@@ -45,12 +45,15 @@
       </select>
     </div>
     <div class="form-group">
-      <label for="name">Submission Date</label>
+      <label for="name">Data Trimiterii</label>
       <input readonly type="text" name="submission_date" class="form-control" value="{{$article->submission_date }}">
     </div>
     <div class="form-group">
-      <label for="name">Approved</label>
-      <input readonly type="text" name="is_approved" class="form-control" value="{{$article->is_approved }}">
+      <label for="name">Status</label>
+      <select name="is_approved" class="form-control">
+        <option value="1" {{ $article->is_approved ? 'selected' : '' }}>Publicat</option>
+        <option value="0" {{ !$article->is_approved ? 'selected' : '' }}>Inca nu este publicat</option>
+      </select>
     </div>
     <div class="form-group">
       <input type="submit" value="Salvare Modificari" class="btn btn-info">

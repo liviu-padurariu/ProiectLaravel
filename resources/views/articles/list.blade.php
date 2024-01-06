@@ -7,7 +7,7 @@
 @endif
 <div class="panel panel-default">
   <div class="panel-heading">
-    Lista sarcinilor
+    Lista Articolelor
   </div>
   <div class="panel-body">
     <div class="form-group">
@@ -22,8 +22,8 @@
         <th>Content</th>
         <th>Nume Autor</th>
         <th>Nume Categorie</th>
-        <th>Submission Date</th>
-        <th>Approved</th>
+        <th>Data Trimiterii</th>
+        <th>Status</th>
         <th width="300">Actiune</th>
       </tr>
       @if (count($articles) > 0)
@@ -35,7 +35,7 @@
         <td>{{ $article->user->name  }}</td>
         <td>{{ $article->category->name }}</td>
         <td>{{ $article->submission_date }}</td>
-        <td>{{ $article->is_approved }}</td>
+        <td>{{ $article->is_approved ? 'Publicat' : 'Inca nu este publicat' }}</td>
         <td>
           <a class="btn btn-success" href="{{route('articles.show',$article->article_id) }}">Vizualizare</a>
           <a class="btn btn-primary" href="{{route('articles.edit',$article->article_id) }}">Modificare</a>
