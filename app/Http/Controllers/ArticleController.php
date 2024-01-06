@@ -31,9 +31,9 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, ['name' => 'required', 'description' => 'required']);
-        // create new task
+        // create new article
         Article::create($request->all());
-        return redirect()->route('articles.index')->with('success', 'Your task added successfully!');
+        return redirect()->route('articles.index')->with('success', 'Your article added successfully!');
     }
 
     /**
@@ -41,8 +41,8 @@ class ArticleController extends Controller
      */
     public function show(string $id)
     {
-        $task = Article::find($id);
-        return view('articles.show', compact('task'));
+        $article = Article::find($id);
+        return view('articles.show', compact('article'));
     }
 
     /**
@@ -50,8 +50,8 @@ class ArticleController extends Controller
      */
     public function edit(string $id)
     {
-        $task = Article::find($id);
-        return view('articles.edit', compact('task'));
+        $article = Article::find($id);
+        return view('articles.edit', compact('article'));
     }
 
     /**
@@ -64,7 +64,7 @@ class ArticleController extends Controller
             'description' => 'required'
         ]);
         Article::find($id)->update($request->all());
-        return redirect()->route('articles.index')->with('success', 'Task updated successfully');
+        return redirect()->route('articles.index')->with('success', 'Article updated successfully');
     }
 
     /**
@@ -73,6 +73,6 @@ class ArticleController extends Controller
     public function destroy(string $id)
     {
         Article::find($id)->delete();
-        return redirect()->route('articles.index')->with('success', 'Task removed successfully');
+        return redirect()->route('articles.index')->with('success', 'Article removed successfully');
     }
 }

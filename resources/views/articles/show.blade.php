@@ -9,10 +9,10 @@
       <a class="btn btn-default" href="{{ route('articles.index') }}">Inapoi</a>
     </div>
     <div class="form-group">
-      <strong>Nume: </strong> {{ $task->title }}
+      <strong>Nume: </strong> {{ $article->title }}
     </div>
     <div class="form-group">
-      <strong>Descriere: </strong> {{ $task->content }}
+      <strong>Descriere: </strong> {{ $article->content }}
     </div>
   </div>
 </div>

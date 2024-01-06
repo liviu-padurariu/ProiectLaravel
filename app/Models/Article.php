@@ -15,6 +15,7 @@ class Article extends Model
     // $table->integer('category_id');
     // $table->dateTime('submission_date');
     // $table->boolean('is_approved');
+    protected $primaryKey = 'article_id';
     protected $fillable = [
         'user_id', 'title', 'content', 'category_id', 'submission_date', 'is_approved'
     ];
