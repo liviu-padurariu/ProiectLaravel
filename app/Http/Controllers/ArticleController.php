@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Categories;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -22,7 +25,9 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('articles.create');
+        $categories = Categories::all();
+        $users = User::all();
+        return view('articles.create', compact('categories', 'users'));
     }
 
     /**
@@ -30,7 +35,15 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, ['name' => 'required', 'description' => 'required']);
+        $this->validate($request, [
+            'title' => 'required',
+            'content' => 'required'
+        ]);
+        // Set 'submission_date' to the current date and time
+        $request->merge(['submission_date' => Carbon::now()]);
+        $request->merge(['is_approved' => false]);
+
+        // create new article
         // create new article
         Article::create($request->all());
         return redirect()->route('articles.index')->with('success', 'Your article added successfully!');
@@ -51,7 +64,9 @@ class ArticleController extends Controller
     public function edit(string $id)
     {
         $article = Article::find($id);
-        return view('articles.edit', compact('article'));
+        $categories = Categories::all();
+        $users = User::all();
+        return view('articles.edit', compact('article', 'categories', 'users'));
     }
 
     /**
@@ -60,8 +75,11 @@ class ArticleController extends Controller
     public function update(Request $request, string $id)
     {
         $this->validate($request, [
-            'name' => 'required',
-            'description' => 'required'
+            'title' => 'required',
+            'content' => 'required',
+            'user_id' => 'required',
+            'category_id' => 'required',
+            'is_approved' => 'required'
         ]);
         Article::find($id)->update($request->all());
         return redirect()->route('articles.index')->with('success', 'Article updated successfully');
