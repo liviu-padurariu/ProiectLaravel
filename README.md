@@ -1,9 +1,6 @@
-# BEFORE RUN CREATE .env FILE #
+# BEFORE RUN CREATE .env FILE
 
-
-# PASTE THE CONTENT FROM THE .env.example FILE #
-
-
+# PASTE THE CONTENT FROM THE .env.example FILE
 
 Run migration after you create the database with code name Dilema.
 
@@ -13,7 +10,7 @@ php artisan migrate:refresh
 
 How to make migration:
 
-php artisan make:migration create_articles_table 
+php artisan make:migration create_articles_table
 
 After updating the migration with the desired changes to run it:
 --path='path to the migration local space, not absoulte'
@@ -23,7 +20,7 @@ How to make new model:
 
 php artisan make:model <ModelName> e.g: Article
 
-How to make seeder: 
+How to make seeder:
 
 php artisan make:seeder <NameSeeder> e.g: DatabaseSeeder, ProductSeeder
 

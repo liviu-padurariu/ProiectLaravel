@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Roles;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -52,7 +53,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:3', 'confirmed'],
         ]);
     }
 
@@ -68,6 +69,20 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role_id' => $this->getDefaultRoleId(), // Set the default role ID
         ]);
+    }
+
+    /**
+     * Get the default role ID.
+     *
+     * @return int
+     */
+    private function getDefaultRoleId()
+    {
+        $defaultRoleName = 'JOURNALIST'; // Adjust this to match your default role name
+        $defaultRole = Roles::where('name', $defaultRoleName)->first();
+
+        return $defaultRole ? $defaultRole->id : 1; // Assuming '1' (Admin) is a fallback role ID
     }
 }
