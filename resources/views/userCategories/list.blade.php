@@ -32,7 +32,7 @@
           <a class="btn btn-success" href="{{route('userCategories.show',$userCategory->id) }}">Vizualizare</a>
           <a class="btn btn-primary" href="{{route('userCategories.edit',$userCategory->id) }}">Modificare</a>
           {{ Form::open(['method' => 'DELETE','route' => ['userCategories.destroy', $userCategory->id],'style'=>'display:inline']) }}
-          {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
+          {{ Form::submit('Stergere', ['class' => 'btn btn-danger']) }}
           {{ Form::close() }}
         </td>
       </tr>

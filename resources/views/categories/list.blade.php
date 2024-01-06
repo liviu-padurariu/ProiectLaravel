@@ -30,7 +30,7 @@
           <a class="btn btn-success" href="{{route('categories.show',$category->id) }}">Vizualizare</a>
           <a class="btn btn-primary" href="{{route('categories.edit',$category->id) }}">Modificare</a>
           {{ Form::open(['method' => 'DELETE','route' => ['categories.destroy', $category->id],'style'=>'display:inline']) }}
-          {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
+          {{ Form::submit('Stergere', ['class' => 'btn btn-danger']) }}
           {{ Form::close() }}
         </td>
       </tr>
