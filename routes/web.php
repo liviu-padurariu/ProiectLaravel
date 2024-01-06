@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserCategoryController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RoleController;
@@ -23,6 +24,7 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/', [ArticleController::class, 'index']);
+    Route::resource('admin', AdminController::class);
     Route::resource('articles', ArticleController::class); // Ruta de resurse va genera CRUD URI
     Route::resource('roles', RoleController::class); // Ruta de resurse va genera CRUD URI
     Route::resource('categories', CategoryController::class); // Ruta de resurse va genera CRUD URI
