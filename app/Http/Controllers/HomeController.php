@@ -41,7 +41,8 @@ class HomeController extends Controller
 
     public function publicPage(Request $request)
     {
-        $articles = Article::orderBy('submission_date', 'ASC')
+        $articles = Article::where('is_approved', true)
+            ->orderBy('submission_date', 'ASC')
             ->with(['user', 'category'])
             ->paginate(5);
         $value = ($request->input('page', 1) - 1) * 5;
