@@ -31,7 +31,7 @@
             <div class="form-group mt-4 mb-4">
                 <label for="categories">Categories:</label><br>
                 @foreach($categories as $category)
-                    <label class="checkbox-inline">
+                    <label class="checkbox-inline m-2">
                         <input type="checkbox" name="categories[]" value="{{ $category->id }}" {{ in_array($category->id, $userCategories->pluck('id')->toArray()) ? 'checked' : '' }}>
                         {{ $category->name }}
                     </label>
