@@ -62,11 +62,11 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->role_id === '1';
+        return $this->role->name === 'ADMIN';
     }
 
     public function isEditor()
     {
-        return $this->role_id === '2';
+        return $this->role->name === 'EDITOR';
     }
 }
