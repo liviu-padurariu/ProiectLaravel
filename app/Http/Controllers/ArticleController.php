@@ -86,8 +86,7 @@ class ArticleController extends Controller
     public function edit(string $id)
     {
         $article = Article::find($id);
-        $categories = Categories::all();
-        $user = User::find(auth()->id());
+        $user = $article->user;
 
         $categories = $user->categories;
         return view('articles.edit', compact('article', 'categories', 'user'));

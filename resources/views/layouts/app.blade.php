@@ -26,6 +26,10 @@
                 <a class="navbar-brand" href="{{ url('/home') }}">
                     Home
                 </a>
+                @if(Auth::user() && Auth::user()->isAdmin())
+                    <!-- Only show the link if the user is an Admin -->
+                    <a class="navbar-brand" href="{{ url('/categories') }}">Categories</a>
+                @endif
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>

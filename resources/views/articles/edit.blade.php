@@ -44,11 +44,15 @@
     </div>
     <div class="form-group mt-4 w-25">
       <label for="name">Status</label>
-      <select name="is_approved" class="form-control">
-        <option value="1" {{ $article->is_approved ? 'selected' : '' }}>Publicat</option>
-        <option value="0" {{ !$article->is_approved ? 'selected' : '' }}>Inca nu este publicat</option>
-      </select>
-    </div>
+      @if(auth()->user()->isEditor())
+          <select name="is_approved" class="form-control">
+              <option value="1" {{ $article->is_approved ? 'selected' : '' }}>Publicat</option>
+              <option value="0" {{ !$article->is_approved ? 'selected' : '' }}>Inca nu este publicat</option>
+          </select>
+      @else
+          <input type="text" class="form-control" value="{{ $article->is_approved ? 'Publicat' : 'Inca nu este publicat' }}" readonly>
+      @endif
+  </div>  
     <div class="form-group mt-4">
       <input type="submit" value="Salvare Modificari" class="btn btn-info">
       <a href="{{route('articles.index') }}" class="btn btn-default">Cancel</a>

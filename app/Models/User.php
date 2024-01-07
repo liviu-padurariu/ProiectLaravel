@@ -45,6 +45,11 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function role(): BelongsTo
     {
         return $this->belongsTo(Roles::class);
@@ -57,6 +62,11 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->role_id === '1';
+        return $this->role->name === 'ADMIN';
+    }
+
+    public function isEditor()
+    {
+        return $this->role->name === 'EDITOR';
     }
 }
