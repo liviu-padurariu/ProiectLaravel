@@ -12,6 +12,10 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
+        if (!auth()->user()->isAdmin()) {
+            return redirect('/home');
+        }
+
         $categories = Categories::orderBy('id', 'ASC')->paginate(5);
         $value = ($request->input('page', 1) - 1) * 5;
         return view('categories.list', compact('categories'))->with('i', $value);

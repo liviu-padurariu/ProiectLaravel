@@ -14,6 +14,10 @@ class AdminController extends Controller
      */
     public function index()
     {
+        if (!auth()->user()->isAdmin()) {
+            return redirect('/home');
+        }
+
         // Fetch all users from the database
         $users = User::all();
 
@@ -33,6 +37,10 @@ class AdminController extends Controller
      */
     public function edit(string $id)
     {
+        if (!auth()->user()->isAdmin()) {
+            return redirect('/home');
+        }
+
         $user = User::find($id);
         $roles = Roles::all();
         $categories = Categories::all();
